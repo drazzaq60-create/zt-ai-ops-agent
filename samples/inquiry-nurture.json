@@ -1,0 +1,10 @@
+{
+  "source": "email",
+  "from_name": "",
+  "from_email": "randomvisitor@example.com",
+  "phone": "",
+  "subject": "question",
+  "raw_text": "Do you guys do furniture and interior work? I might do something small next year in Lahore, not sure of budget yet.",
+  "has_attachment": false,
+  "attachment_type": "none"
+}

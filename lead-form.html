@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Z&T Landscape & Construction — Request a Quote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0d1f16; --card:#12271c; --card2:#16301f;
+    --green:#2c6942; --green-l:#3c8354; --mint:#37d39a;
+    --gold:#c8a860; --gold-d:#b8884c;
+    --cream:#faf7f2; --muted:#9db4a5; --border:#24432e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--cream);
+    font-family:"Inter",system-ui,sans-serif;line-height:1.5;
+    display:flex;justify-content:center;padding:32px 16px;}
+  .wrap{width:100%;max-width:560px}
+  .brand{text-align:center;margin-bottom:24px}
+  .logo{display:inline-block;border:1.5px solid var(--gold);border-radius:10px;
+    padding:10px 18px;font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.5px}
+  .logo .amp{color:var(--mint)}
+  .logo .sub{display:block;font-family:"Inter",sans-serif;font-weight:500;
+    font-size:9px;letter-spacing:3px;color:var(--gold);margin-top:2px}
+  h1{font-family:"Playfair Display",serif;font-size:26px;margin:18px 0 4px;text-align:center}
+  .tag{color:var(--muted);text-align:center;margin:0 0 24px;font-size:14px}
+  form{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:#dfeee2}
+  label .req{color:var(--gold)}
+  input,select,textarea{width:100%;padding:11px 13px;border-radius:9px;
+    background:var(--card2);border:1px solid var(--border);color:var(--cream);
+    font-family:inherit;font-size:14px;outline:none;transition:border .15s}
+  input:focus,select:focus,textarea:focus{border-color:var(--mint)}
+  textarea{min-height:84px;resize:vertical}
+  .row{display:flex;gap:12px}
+  .row>div{flex:1}
+  button{width:100%;margin-top:22px;padding:13px;border:0;border-radius:10px;
+    background:linear-gradient(90deg,var(--green),var(--green-l));
+    color:#fff;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:opacity .15s}
+  button:hover{opacity:.92}
+  button:disabled{opacity:.55;cursor:default}
+  .note{color:var(--muted);font-size:11px;text-align:center;margin-top:14px}
+  .ok,.err{display:none;margin-top:18px;padding:14px 16px;border-radius:10px;font-size:14px}
+  .ok{background:rgba(55,211,154,.12);border:1px solid var(--mint);color:#bff3dd}
+  .err{background:rgba(220,80,80,.12);border:1px solid #c96;color:#f3c9c9}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">Z<span class="amp">&amp;</span>T
+        <span class="sub">LANDSCAPE &amp; CONSTRUCTION</span>
+      </div>
+    </div>
+    <h1>Request a Free Quote</h1>
+    <p class="tag">Tell us about your project — our team replies within one business day.</p>
+
+    <form id="leadForm">
+      <label>Full Name <span class="req">*</span></label>
+      <input name="from_name" required placeholder="e.g. Ali Raza" />
+
+      <div class="row">
+        <div>
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="from_email" required placeholder="you@example.com" />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input name="phone" placeholder="0300 1234567" />
+        </div>
+      </div>
+
+      <label>Service Needed <span class="req">*</span></label>
+      <select name="service" required>
+        <option value="">Select a service…</option>
+        <option value="waterproofing">Waterproofing (roof / basement / tank)</option>
+        <option value="swimming_pools">Swimming Pool — design & construction</option>
+        <option value="landscape_design">Landscape Design (garden / lawn / irrigation)</option>
+        <option value="building_works">Building Works (renovation / walls)</option>
+        <option value="other">Something else</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label>Approx. Budget (PKR)</label>
+          <input type="number" name="budget" placeholder="e.g. 200000" min="0" step="10000" />
+        </div>
+        <div>
+          <label>Timeline</label>
+          <select name="timeline_days">
+            <option value="">Select…</option>
+            <option value="14">Within 2 weeks</option>
+            <option value="30">Within a month</option>
+            <option value="75">2–3 months</option>
+            <option value="150">Flexible / later</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Location (Area & City)</label>
+      <input name="location" placeholder="e.g. Bahria Town Phase 4, Rawalpindi" />
+
+      <label>Message / Details</label>
+      <textarea name="message" placeholder="Describe your project…"></textarea>
+
+      <button type="submit" id="btn">Send Request</button>
+      <p class="note">Your details go straight to the Z&amp;T team. No spam.</p>
+
+      <div class="ok" id="ok">✅ Thank you! Your request has been received — we'll be in touch shortly.</div>
+      <div class="err" id="err">⚠️ Something went wrong sending your request. Please try again.</div>
+    </form>
+  </div>
+
+<script>
+  // ── Where n8n listens. Use the PRODUCTION url (workflow must be ACTIVE).
+  //    Test url instead: http://localhost:5678/webhook-test/zt-lead  (needs "Execute workflow" each time)
+  const WEBHOOK_URL = "http://localhost:5678/webhook/zt-lead";
+
+  const serviceLabels = {
+    waterproofing:"Waterproofing", swimming_pools:"Swimming Pool",
+    landscape_design:"Landscape Design", building_works:"Building Works", other:"Other"
+  };
+
+  document.getElementById("leadForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.target, btn = document.getElementById("btn");
+    const ok = document.getElementById("ok"), err = document.getElementById("err");
+    ok.style.display = err.style.display = "none";
+    const g = n => (f.elements[n]?.value || "").trim();
+
+    const name=g("from_name"), email=g("from_email"), phone=g("phone");
+    const service=g("service"), budget=g("budget"), timeline=g("timeline_days");
+    const location=g("location"), message=g("message");
+
+    // Build a clear natural-language message so the AI extracts every field reliably.
+    const raw_text =
+      `Name: ${name}. Service requested: ${serviceLabels[service]||service}. `
+      + `Location: ${location||"not specified"}. `
+      + `Approximate budget: ${budget?("PKR "+budget):"not specified"}. `
+      + `Desired timeline: ${timeline?(timeline+" days"):"not specified"}. `
+      + `Message: ${message||"(none)"}`;
+
+    const payload = {
+      source:"website",
+      from_name:name, from_email:email, phone,
+      subject:`Website inquiry: ${serviceLabels[service]||service}`,
+      raw_text,
+      // structured values too (handy if you later skip AI extraction):
+      service_requested:service, budget_pkr:budget?Number(budget):null,
+      timeline_days:timeline?Number(timeline):null, location,
+      has_attachment:false, attachment_type:"none"
+    };
+
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      ok.style.display="block"; f.reset();
+    } catch(ex){
+      err.style.display="block"; err.textContent="⚠️ "+ex.message+" — is n8n running and the workflow Active?";
+    } finally {
+      btn.disabled=false; btn.textContent="Send Request";
+    }
+  });
+</script>
+</body>
+</html>

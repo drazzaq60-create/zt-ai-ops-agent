@@ -1,0 +1,10 @@
+{
+  "source": "email",
+  "from_name": "Sky Cement Suppliers",
+  "from_email": "billing@skycement.example.com",
+  "phone": "0512345678",
+  "subject": "Invoice #SC-4471 for cement delivery",
+  "raw_text": "Dear Z&T, please find our invoice SC-4471 dated 28-09-2026. 50 bags cement @ PKR 1,350 = PKR 67,500. 20 bags @ PKR 1,300 = PKR 26,000. Total PKR 93,500. Payment due by 12-10-2026.",
+  "has_attachment": true,
+  "attachment_type": "pdf"
+}

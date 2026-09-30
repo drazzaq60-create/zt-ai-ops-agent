@@ -1,0 +1,23 @@
+# Secrets — never commit
+.env
+*.env
+credentials.json
+*credential*
+
+# n8n local data (may contain secrets)
+n8n_data/
+.n8n/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Large / local demo captures (keep the final one only)
+demo-video/*.tmp
